@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/cubits/get_weather_cubit/weather_cubit.dart';
+import 'package:weather_app/main.dart';
 import 'package:weather_app/model/weather_model.dart';
 
 class WeatherResponsePage extends StatelessWidget {
@@ -8,26 +9,35 @@ class WeatherResponsePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WeatherModel weatherData =
+    WeatherModel? weatherData =
         BlocProvider.of<WeathterCubit>(context).weatherData;
     return Padding(
-      padding: const EdgeInsets.all(0),
+      padding: EdgeInsets.all(0),
       child: Container(
-        decoration: const BoxDecoration(
-            gradient:
-                const LinearGradient(colors: [Colors.blue, Colors.white])),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+              getWeatherColor(BlocProvider.of<WeathterCubit>(context)
+                  .weatherData
+                  ?.weatherCondition)[800]!,
+              getWeatherColor(BlocProvider.of<WeathterCubit>(context)
+                  .weatherData
+                  ?.weatherCondition)[200]!,
+            ])),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
               children: [
                 Text(
-                  "${weatherData.cityName}.",
+                  "${weatherData!.cityName}.",
                   style: const TextStyle(
                       fontWeight: FontWeight.w900, fontSize: 40),
                 ),
                 Text(
-                  "${weatherData.contounty}.",
+                  "${weatherData!.contounty}.",
                   style: const TextStyle(
                       fontWeight: FontWeight.w900, fontSize: 30),
                 ),

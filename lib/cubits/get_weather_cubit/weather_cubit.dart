@@ -6,7 +6,7 @@ import 'package:weather_app/repositories/weather_repositoy.dart';
 
 class WeathterCubit extends Cubit<WeatheStates> {
   WeathterCubit() : super(InitialState());
-  late WeatherModel weatherData;
+  WeatherModel? weatherData;
 
   getWeather(String value) async {
     emit(InitialState());
